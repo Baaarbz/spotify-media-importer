@@ -2,7 +2,6 @@ package bootstrap
 
 import (
 	"gopkg.in/yaml.v3"
-	"log"
 	"os"
 )
 
@@ -19,8 +18,6 @@ func Run() error {
 	if err != nil {
 		return err
 	}
-
-	log.Print(cfg)
 
 	return nil
 }
