@@ -1,0 +1,16 @@
+<div class="m-2">
+  <small class="text-muted">Generate your token here!
+    <a href="https://developer.spotify.com/console/put-current-user-saved-tracks/?ids=">Spotify API</a>
+  </small>
+  <div class="input-group mt-2">
+  <span class="input-group-text">
+    <i style="color: #1DB954" class="bi bi-spotify"></i>
+  </span>
+    <input [(ngModel)]="spotifyToken"
+           (ngModelChange)="setToken($event)"
+           type="text"
+           class="form-control"
+           placeholder="Spotify token"
+           aria-label="Spotify token">
+  </div>
+</div>
