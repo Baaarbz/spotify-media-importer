@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {BehaviorSubject} from "rxjs";
+import {BehaviorSubject, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class TrackService {
     this.tracksSubject.next(tracks);
   }
 
-  getTracks(): string[] {
-    return this.tracksSubject.value;
+  get tracks(): Observable<string[]> {
+    return this.tracksSubject.asObservable();
   }
 }

@@ -25,6 +25,10 @@ export class SpotifyService {
     return this.tokenSubject.value;
   }
 
+  get tokenObservable(): Observable<string> {
+    return this.tokenSubject.asObservable();
+  }
+
   saveTrack(trackId: string): void {
     const params = new HttpParams()
       .set('ids', trackId);

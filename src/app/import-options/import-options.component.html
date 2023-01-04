@@ -1,6 +1,6 @@
-<div class="form-check form-switch m-2">
-  <input class="form-check-input" type="checkbox" role="switch" id="autoImportSwitch" (change)="changeAutoimport($event.target)">
-  <label class="form-check-label" for="autoImportSwitch">Auto-import your song list</label>
+<div class="form-check form-switch">
+  <input class="form-check-input" type="checkbox" role="switch" id="autoImportSwitch" (change)="changeAutoimport($event.target)" [disabled]="disabledOptions">
+  <label class="form-check-label unselectable" for="autoImportSwitch">Auto-import your song list</label>
   <i
     class="bi bi-info-circle text-muted mx-2"
     ngbTooltip="If it is activated, then all the song will be added automatically to your list, otherwise you will be asked for each song which version you want"
