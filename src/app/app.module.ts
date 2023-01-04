@@ -7,12 +7,14 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { FileLoaderComponent } from './file-loader/file-loader.component';
+import { ImportOptionsComponent } from './import-options/import-options.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TokenComponent,
     FileLoaderComponent,
+    ImportOptionsComponent,
   ],
   imports: [
     BrowserModule,

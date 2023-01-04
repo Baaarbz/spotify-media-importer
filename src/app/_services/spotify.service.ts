@@ -36,7 +36,7 @@ export class SpotifyService {
     const params = new HttpParams()
       .set("q", trackName)
       .set("type", "track")
-      .set("limit", "3");
+      .set("limit", "5");
 
     return this.http.get<SearchTrack>(spotifyConstants.baseUrl + spotifyConstants.endpointSearchTrack, {params})
   }
