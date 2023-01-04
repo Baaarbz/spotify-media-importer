@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
+import {OptionsService} from "../_services/options.service";
 
 @Component({
   selector: 'app-import-options',
@@ -7,4 +8,12 @@ import { Component } from '@angular/core';
 })
 export class ImportOptionsComponent {
 
+  constructor(
+    private optionService: OptionsService
+  ) {
+  }
+
+  changeAutoimport(event: any) {
+    this.optionService.setAutoimport(event.checked);
+  }
 }
