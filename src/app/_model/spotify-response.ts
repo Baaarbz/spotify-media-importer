@@ -1,5 +1,5 @@
 export interface SearchTrack {
-  tracks: Track[]
+  tracks: Track[];
 }
 
 interface Image {
@@ -15,7 +15,7 @@ interface Album {
 }
 
 interface Artist {
-  name: String
+  name: String;
 }
 
 interface Item {
@@ -25,9 +25,9 @@ interface Item {
   preview_url: string;
   duration_ms: number;
   album: Album;
-  artists: Artist[]
+  artists: Artist[];
 }
 
 export interface Track {
-  items: Item[]
+  items: Item[];
 }
