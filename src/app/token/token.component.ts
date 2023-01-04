@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import {SpotifyService} from '../_services/spotify.service';
 
 @Component({
   selector: 'app-token',
@@ -6,9 +7,15 @@ import {Component} from '@angular/core';
   styleUrls: ['./token.component.scss']
 })
 export class TokenComponent {
-  spotifyToken: String = ''
 
-  setToken(token: String) {
+  constructor(
+    private spotifyService: SpotifyService
+  ) {
+  }
 
+  spotifyToken: string = ''
+
+  setToken(token: string): void {
+    this.spotifyService.setToken(token)
   }
 }
