@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "spotify-media-transfer": {
+    "spotify-media-importer": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/spotify-media-transfer",
+            "outputPath": "dist/spotify-media-importer",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -69,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "spotify-media-transfer:build:production"
+              "browserTarget": "spotify-media-importer:build:production"
             },
             "development": {
-              "browserTarget": "spotify-media-transfer:build:development"
+              "browserTarget": "spotify-media-importer:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -80,7 +80,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "spotify-media-transfer:build"
+            "browserTarget": "spotify-media-importer:build"
           }
         },
         "test": {

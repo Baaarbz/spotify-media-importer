@@ -6,7 +6,7 @@ function createWindow() {
   win = new BrowserWindow({
     width: 800,
     height: 600,
-    title: "Spotify Media Transfer",
+    title: "Spotify Media Importer",
     resizable: false,
     webPreferences: {
       contextIsolation: false,
@@ -14,7 +14,7 @@ function createWindow() {
     }
   });
 
-  win.loadURL(`file://${__dirname}/../dist/spotify-media-transfer/index.html`);
+  win.loadURL(`file://${__dirname}/../dist/spotify-media-importer/index.html`);
   win.setMenu(null);
   win.webContents.openDevTools();
   win.on("closed", () => {
