@@ -42,17 +42,17 @@ export class ImportInitializerComponent implements OnInit, OnDestroy {
     )
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  startImport() {
+  startImport(): void {
     this.optionsService.setDisableOptions(true);
     this.disabledButton = true;
     this.importInitializerService.init(true);
   }
 
-  private setDisabledButton() {
+  private setDisabledButton(): void {
     this.disabledButton = this.emptyTracks || this.emptyToken;
   }
 }

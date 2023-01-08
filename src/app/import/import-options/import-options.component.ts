@@ -18,7 +18,7 @@ export class ImportOptionsComponent implements OnInit, OnDestroy {
     this.subscription = new Subscription();
   }
 
-  changeOptions(event: any) {
+  changeOptions(event: any): void {
     switch (event.id) {
       case 'autoImportSwitch':
         this.optionsService.setAutoimport(event.checked);
@@ -40,7 +40,7 @@ export class ImportOptionsComponent implements OnInit, OnDestroy {
     }));
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 }

@@ -32,11 +32,11 @@ export class ImportComponent implements OnInit, OnDestroy {
     }));
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
-  private initImport() {
+  private initImport(): void {
     if (this.optionsService.isSaveLikedSongsEnabled()) {
       this.importToLikedSongs();
     } else if (this.optionsService.isCreateNewListEnabled()) {
@@ -44,15 +44,19 @@ export class ImportComponent implements OnInit, OnDestroy {
     }
   }
 
-  private importToLikedSongs() {
+  private importToLikedSongs(): void {
 
   }
 
-  private importToNewList() {
+  private importToNewList(): void {
     this.spotifyService.getUserProfile().subscribe((response: GetUserProfile) => {
       this.spotifyService.createPlaylist(response.id).subscribe((response: CreatePlaylist) => {
         this.playlistId = response.id;
       })
     })
+  }
+
+  private addItemsToNewList(): void {
+
   }
 }
