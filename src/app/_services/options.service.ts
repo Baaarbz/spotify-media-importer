@@ -7,10 +7,14 @@ import {BehaviorSubject, Observable} from "rxjs";
 export class OptionsService {
 
   private autoimportEnabled: BehaviorSubject<boolean>;
+  private createNewListEnabled: BehaviorSubject<boolean>;
+  private saveLikedSongsEnabled: BehaviorSubject<boolean>;
   private disableOptions: BehaviorSubject<boolean>;
 
   constructor() {
     this.autoimportEnabled = new BehaviorSubject<boolean>(false);
+    this.createNewListEnabled = new BehaviorSubject<boolean>(false);
+    this.saveLikedSongsEnabled = new BehaviorSubject<boolean>(true);
     this.disableOptions = new BehaviorSubject<boolean>(false);
   }
 
@@ -18,7 +22,7 @@ export class OptionsService {
     return this.disableOptions.asObservable();
   }
 
-  setDiasbleOptions(value: boolean) {
+  setDisableOptions(value: boolean) {
     this.disableOptions.next(value)
   }
 
@@ -28,5 +32,21 @@ export class OptionsService {
 
   isAutoimportEnabled(): boolean {
     return this.autoimportEnabled.value;
+  }
+
+  setSaveLikedSongs(value: boolean) {
+    this.saveLikedSongsEnabled.next(value);
+  }
+
+  isSaveLikedSongsEnabled(): boolean {
+    return this.saveLikedSongsEnabled.value;
+  }
+
+  setCreateNewList(value: boolean) {
+    this.createNewListEnabled.next(value);
+  }
+
+  isCreateNewListEnabled(): boolean {
+    return this.createNewListEnabled.value;
   }
 }

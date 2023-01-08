@@ -18,8 +18,20 @@ export class ImportOptionsComponent implements OnInit, OnDestroy {
     this.subscription = new Subscription();
   }
 
-  changeAutoimport(event: any) {
-    this.optionService.setAutoimport(event.checked);
+  changeOptions(event: any) {
+    switch (event.id) {
+      case 'autoImportSwitch':
+        this.optionService.setAutoimport(event.checked);
+        break;
+      case 'saveToNewList':
+        this.optionService.setCreateNewList(true);
+        this.optionService.setSaveLikedSongs(false);
+        break;
+      case 'saveToLikedSongs':
+        this.optionService.setCreateNewList(false);
+        this.optionService.setSaveLikedSongs(true);
+        break;
+    }
   }
 
   ngOnInit(): void {

@@ -44,7 +44,7 @@ export class ImportInitializerComponent implements OnInit, OnDestroy {
   }
 
   startImport() {
-    this.optionsService.setDiasbleOptions(true);
+    this.optionsService.setDisableOptions(true);
   }
 
   private setDisabledButton() {
