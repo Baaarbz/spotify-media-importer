@@ -24,7 +24,7 @@ export class TokenComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscription.add(
-      this.importInitializerService.initObservable.subscribe((value: boolean) => {
+      this.importInitializerService.runningObservable.subscribe((value: boolean) => {
         this.disableInput = value;
       })
     );

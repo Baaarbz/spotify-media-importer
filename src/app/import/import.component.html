@@ -5,11 +5,9 @@
     {{completedPercentage}}%
   </div>
 </div>
-<div class="my-4 bi-text-center" *ngIf="notAddedSongs.length > 0">List of songs that can not be added:
+<div class="my-4 bi-text-center">List of songs that can not be added:
   <p>
     <small class="text-muted">This could be because the name of the song is too long, or it is wrong!</small>
   </p>
-  <div class="scroll">
-    <p *ngFor="let track of notAddedSongs">{{track}}</p>
-  </div>
+  <p *ngFor="let track of notAddedSongs">{{track}}</p>
 </div>

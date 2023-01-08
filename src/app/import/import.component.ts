@@ -32,8 +32,9 @@ export class ImportComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscription.add(this.importInitializerService.initObservable.subscribe((value: boolean) => {
+    this.subscription.add(this.importInitializerService.runningObservable.subscribe((value: boolean) => {
       if (value) {
+        this.notAddedSongs = [];
         this.initImport();
       }
     }));
@@ -57,12 +58,24 @@ export class ImportComponent implements OnInit, OnDestroy {
     } else if (this.optionsService.isCreateNewListEnabled()) {
       this.importToNewList();
     }
-    this.importInitializerService.finish(true);
-    this.completed = 0;
   }
 
-  private importToLikedSongs(): void {
+  private async importToLikedSongs() {
+    for (const track of this.tracks) {
+      await firstValueFrom(this.spotifyService.searchTrack(track))
+        .then(async (searchedTrack: SearchTrack) => {
+          if (searchedTrack != undefined && searchedTrack.tracks != undefined && searchedTrack.tracks.items.length > 0) {
+            await firstValueFrom(this.spotifyService.saveTrackToLikedSongs(searchedTrack.tracks.items[0].id));
+          }
+        })
+        .catch(() => {
+          this.notAddedSongs.push(track);
+        });
 
+      this.completed++;
+      this.calculatePercentage();
+    }
+    this.importInitializerService.running(false);
   }
 
   private async importToNewList() {
@@ -73,6 +86,7 @@ export class ImportComponent implements OnInit, OnDestroy {
 
   private async addItemsToNewList(playlistId: string) {
     for (const track of this.tracks) {
+
       await firstValueFrom(this.spotifyService.searchTrack(track))
         .then(async (searchedTrack: SearchTrack) => {
           if (searchedTrack != undefined && searchedTrack.tracks != undefined && searchedTrack.tracks.items.length > 0) {
@@ -82,9 +96,11 @@ export class ImportComponent implements OnInit, OnDestroy {
         .catch(() => {
           this.notAddedSongs.push(track);
         });
+
       this.completed++;
       this.calculatePercentage();
     }
+    this.importInitializerService.running(false);
   }
 
   private calculatePercentage() {

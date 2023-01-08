@@ -6,27 +6,17 @@ import {BehaviorSubject, Observable} from "rxjs";
 })
 export class ImportInitializerService {
 
-  private initSubject: BehaviorSubject<boolean>;
-  private finishedSubject: BehaviorSubject<boolean>;
+  private runningSubject: BehaviorSubject<boolean>;
 
   constructor() {
-    this.initSubject = new BehaviorSubject<boolean>(false);
-    this.finishedSubject = new BehaviorSubject<boolean>(false);
+    this.runningSubject = new BehaviorSubject<boolean>(false);
   }
 
-  init(value: boolean): void {
-    this.initSubject.next(value);
+  running(value: boolean): void {
+    this.runningSubject.next(value);
   }
 
-  get initObservable(): Observable<boolean> {
-    return this.initSubject.asObservable();
-  }
-
-  finish(value: boolean): void {
-    this.finishedSubject.next(value);
-  }
-
-  get finishedObservable(): Observable<boolean> {
-    return this.finishedSubject.asObservable();
+  get runningObservable(): Observable<boolean> {
+    return this.runningSubject.asObservable();
   }
 }

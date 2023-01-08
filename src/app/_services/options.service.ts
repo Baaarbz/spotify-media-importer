@@ -9,21 +9,11 @@ export class OptionsService {
   private autoimportEnabled: BehaviorSubject<boolean>;
   private createNewListEnabled: BehaviorSubject<boolean>;
   private saveLikedSongsEnabled: BehaviorSubject<boolean>;
-  private disableOptions: BehaviorSubject<boolean>;
 
   constructor() {
     this.autoimportEnabled = new BehaviorSubject<boolean>(true);
     this.createNewListEnabled = new BehaviorSubject<boolean>(false);
     this.saveLikedSongsEnabled = new BehaviorSubject<boolean>(true);
-    this.disableOptions = new BehaviorSubject<boolean>(false);
-  }
-
-  get isOptionsDisabled(): Observable<boolean> {
-    return this.disableOptions.asObservable();
-  }
-
-  setDisableOptions(value: boolean) {
-    this.disableOptions.next(value)
   }
 
   setAutoimport(value: boolean) {

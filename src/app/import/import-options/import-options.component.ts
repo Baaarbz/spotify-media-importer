@@ -1,6 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {OptionsService} from "../../_services/options.service";
 import {Subscription} from "rxjs";
+import {ImportInitializerService} from "../import-initializer/import-initializer.service";
 
 @Component({
   selector: 'app-import-options',
@@ -13,9 +14,20 @@ export class ImportOptionsComponent implements OnInit, OnDestroy {
   private subscription: Subscription;
 
   constructor(
-    private optionsService: OptionsService
+    private optionsService: OptionsService,
+    private importInitializerService: ImportInitializerService
   ) {
     this.subscription = new Subscription();
+  }
+
+  ngOnInit(): void {
+    this.subscription.add(this.importInitializerService.runningObservable.subscribe((value: boolean) => {
+      this.disabledOptions = value;
+    }));
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   changeOptions(event: any): void {
@@ -32,15 +44,5 @@ export class ImportOptionsComponent implements OnInit, OnDestroy {
         this.optionsService.setSaveLikedSongs(true);
         break;
     }
-  }
-
-  ngOnInit(): void {
-    this.subscription.add(this.optionsService.isOptionsDisabled.subscribe((disabled: boolean) => {
-      this.disabledOptions = disabled;
-    }));
-  }
-
-  ngOnDestroy(): void {
-    this.subscription.unsubscribe();
   }
 }
