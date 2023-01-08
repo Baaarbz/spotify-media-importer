@@ -35,6 +35,7 @@ export class ImportComponent implements OnInit, OnDestroy {
     this.subscription.add(this.importInitializerService.runningObservable.subscribe((value: boolean) => {
       if (value) {
         this.notAddedSongs = [];
+        this.completed = 0;
         this.initImport();
       }
     }));
