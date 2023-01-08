@@ -1,5 +1,5 @@
 export interface SearchTrack {
-  tracks: Track[];
+  tracks: Track;
 }
 
 export interface CreatePlaylist {

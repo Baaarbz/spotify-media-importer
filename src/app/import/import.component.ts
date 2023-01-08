@@ -1,10 +1,10 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {Subscription} from "rxjs";
+import {firstValueFrom, Subscription} from "rxjs";
 import {TrackService} from "../_services/track.service";
 import {OptionsService} from "../_services/options.service";
 import {SpotifyService} from "../_services/spotify.service";
 import {ImportInitializerService} from "./import-initializer/import-initializer.service";
-import {CreatePlaylist, GetUserProfile} from "../_model/spotify-response";
+import {CreatePlaylist, GetUserProfile, SearchTrack} from "../_model/spotify-response";
 
 @Component({
   selector: 'app-import',
@@ -51,12 +51,24 @@ export class ImportComponent implements OnInit, OnDestroy {
   private importToNewList(): void {
     this.spotifyService.getUserProfile().subscribe((response: GetUserProfile) => {
       this.spotifyService.createPlaylist(response.id).subscribe((response: CreatePlaylist) => {
-        this.playlistId = response.id;
+        this.addItemsToNewList(response.id)
       })
     })
   }
 
-  private addItemsToNewList(): void {
-
+  private async addItemsToNewList(playlistId: string) {
+    let notAddedSongs: string[] = [];
+    for (const track of this.trackService.tracks) {
+      await firstValueFrom(this.spotifyService.searchTrack(track))
+        .then(async (searchedTrack: SearchTrack) => {
+          if (searchedTrack != undefined && searchedTrack.tracks != undefined && searchedTrack.tracks.items.length > 0) {
+            await firstValueFrom(this.spotifyService.saveItemToPlaylist(playlistId, searchedTrack.tracks.items[0].uri));
+          }
+        })
+        .catch(() => {
+          notAddedSongs.push(track);
+        });
+    }
+    console.log(notAddedSongs);
   }
 }

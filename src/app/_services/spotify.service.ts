@@ -30,18 +30,20 @@ export class SpotifyService {
     return this.tokenSubject.asObservable();
   }
 
-  saveTrackToLikedSongs(trackId: string): void {
+  saveTrackToLikedSongs(...trackIds: string[]): void {
     const endpoint: string = spotifyConstants.baseUrl + '/v1/me/tracks';
     const params = new HttpParams()
-      .set('ids', trackId);
+      .set('ids', trackIds.join(','));
 
     this.http.put(endpoint, null, {params});
   }
 
-  saveItemToPlaylist(playlistId: string) {
+  saveItemToPlaylist(playlistId: string, ...itemUri: string[]): Observable<any> {
     const endpoint: string = spotifyConstants.baseUrl + `/v1/playlists/${playlistId}/tracks`;
+    const params = new HttpParams()
+      .set('uris', itemUri.join(','));
 
-
+    return this.http.post(endpoint, null, {params})
   }
 
   searchTrack(trackName: string): Observable<SearchTrack> {

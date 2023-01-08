@@ -29,7 +29,7 @@ export class ImportInitializerComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscription.add(
-      this.trackService.tracks.subscribe((tracks: string[]) => {
+      this.trackService.tracksObservable.subscribe((tracks: string[]) => {
         this.emptyTracks = tracks.length == 0
         this.setDisabledButton();
       })

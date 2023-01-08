@@ -15,7 +15,11 @@ export class TrackService {
     this.tracksSubject.next(tracks);
   }
 
-  get tracks(): Observable<string[]> {
+  get tracksObservable(): Observable<string[]> {
     return this.tracksSubject.asObservable();
+  }
+
+  get tracks(): string[] {
+    return this.tracksSubject.value;
   }
 }
