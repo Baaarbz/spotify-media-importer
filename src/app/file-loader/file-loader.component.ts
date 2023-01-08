@@ -1,16 +1,36 @@
-import {Component} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {TrackService} from "../_services/track.service";
+import {Subscription} from "rxjs";
+import {ImportInitializerService} from "../import/import-initializer/import-initializer.service";
 
 @Component({
   selector: 'app-file-loader',
   templateUrl: './file-loader.component.html',
   styleUrls: ['./file-loader.component.scss']
 })
-export class FileLoaderComponent {
+export class FileLoaderComponent implements OnInit, OnDestroy {
+
+  disableInput: boolean;
+  private subscription: Subscription;
 
   constructor(
-    private trackService: TrackService
+    private trackService: TrackService,
+    private importInitializerService: ImportInitializerService
   ) {
+    this.subscription = new Subscription();
+    this.disableInput = false;
+  }
+
+  ngOnInit(): void {
+    this.subscription.add(
+      this.importInitializerService.initObservable.subscribe((value: boolean) => {
+        this.disableInput = value;
+      })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   loadCsv(event: any): void {

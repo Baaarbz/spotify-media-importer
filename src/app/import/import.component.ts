@@ -9,12 +9,17 @@ import {CreatePlaylist, GetUserProfile, SearchTrack} from "../_model/spotify-res
 @Component({
   selector: 'app-import',
   templateUrl: './import.component.html',
-  styleUrls: ['./import.component.scss']
+  styleUrls: ['./import.component.scss'],
 })
 export class ImportComponent implements OnInit, OnDestroy {
 
+  completedPercentage: string = '0';
+  completed: number = 0;
+  totalTracks: number = 0;
+  notAddedSongs: string[] = [];
   private subscription: Subscription;
   private playlistId: string;
+  private tracks: string[] = [];
 
   constructor(
     private trackService: TrackService,
@@ -27,9 +32,19 @@ export class ImportComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscription.add(this.importInitializerService.initObservable.subscribe(() => {
-      this.initImport();
+    this.subscription.add(this.importInitializerService.initObservable.subscribe((value: boolean) => {
+      if (value) {
+        this.initImport();
+      }
     }));
+    this.subscription.add(
+      this.trackService.tracksObservable.subscribe((tracks: string[]) => {
+        if (tracks.length != 0) {
+          this.totalTracks = tracks.length;
+          this.tracks = tracks;
+        }
+      })
+    );
   }
 
   ngOnDestroy(): void {
@@ -42,23 +57,22 @@ export class ImportComponent implements OnInit, OnDestroy {
     } else if (this.optionsService.isCreateNewListEnabled()) {
       this.importToNewList();
     }
+    this.importInitializerService.finish(true);
+    this.completed = 0;
   }
 
   private importToLikedSongs(): void {
 
   }
 
-  private importToNewList(): void {
-    this.spotifyService.getUserProfile().subscribe((response: GetUserProfile) => {
-      this.spotifyService.createPlaylist(response.id).subscribe((response: CreatePlaylist) => {
-        this.addItemsToNewList(response.id)
-      })
-    })
+  private async importToNewList() {
+    const userProfile: GetUserProfile = await firstValueFrom(this.spotifyService.getUserProfile());
+    const createdPlaylist: CreatePlaylist = await firstValueFrom(this.spotifyService.createPlaylist(userProfile.id));
+    this.addItemsToNewList(createdPlaylist.id);
   }
 
   private async addItemsToNewList(playlistId: string) {
-    let notAddedSongs: string[] = [];
-    for (const track of this.trackService.tracks) {
+    for (const track of this.tracks) {
       await firstValueFrom(this.spotifyService.searchTrack(track))
         .then(async (searchedTrack: SearchTrack) => {
           if (searchedTrack != undefined && searchedTrack.tracks != undefined && searchedTrack.tracks.items.length > 0) {
@@ -66,9 +80,14 @@ export class ImportComponent implements OnInit, OnDestroy {
           }
         })
         .catch(() => {
-          notAddedSongs.push(track);
+          this.notAddedSongs.push(track);
         });
+      this.completed++;
+      this.calculatePercentage();
     }
-    console.log(notAddedSongs);
+  }
+
+  private calculatePercentage() {
+    this.completedPercentage = ((this.completed / this.totalTracks) * 100).toFixed(2);
   }
 }

@@ -1,0 +1,15 @@
+<div class="text-center text-muted import-status">{{completed}}/{{totalTracks}}</div>
+<div class="progress">
+  <div [style.width.%]="completedPercentage" class="progress-bar spotify-bg-color" role="progressbar" aria-valuemin="0"
+       aria-valuemax="100">
+    {{completedPercentage}}%
+  </div>
+</div>
+<div class="my-4 bi-text-center" *ngIf="notAddedSongs.length > 0">List of songs that can not be added:
+  <p>
+    <small class="text-muted">This could be because the name of the song is too long, or it is wrong!</small>
+  </p>
+  <div class="scroll">
+    <p *ngFor="let track of notAddedSongs">{{track}}</p>
+  </div>
+</div>

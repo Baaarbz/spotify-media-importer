@@ -12,7 +12,7 @@ export class OptionsService {
   private disableOptions: BehaviorSubject<boolean>;
 
   constructor() {
-    this.autoimportEnabled = new BehaviorSubject<boolean>(false);
+    this.autoimportEnabled = new BehaviorSubject<boolean>(true);
     this.createNewListEnabled = new BehaviorSubject<boolean>(false);
     this.saveLikedSongsEnabled = new BehaviorSubject<boolean>(true);
     this.disableOptions = new BehaviorSubject<boolean>(false);

@@ -9,11 +9,6 @@
   <span class="input-group-text">
     <i class="bi bi-spotify spotify-color"></i>
   </span>
-    <input [(ngModel)]="spotifyToken"
-           (ngModelChange)="setToken($event)"
-           type="text"
-           class="form-control"
-           placeholder="Spotify token"
-           aria-label="Spotify token">
+    <input [(ngModel)]="spotifyToken" (ngModelChange)="setToken($event)" [disabled]="disableInput" type="text" class="form-control" placeholder="Spotify token" aria-label="Spotify token">
   </div>
 </div>

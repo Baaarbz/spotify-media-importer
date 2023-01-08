@@ -1,4 +1,4 @@
 <div>
-  <label for="formFile" class="form-label">Load your csv with your track names!</label>
-  <input class="form-control" type="file" id="formFile" accept=".csv" (change)="loadCsv($event)">
+  <label for="formFile" class="form-label label-input-import">Load your csv with your track names!</label>
+  <input class="form-control" type="file" id="formFile" accept=".csv" (change)="loadCsv($event)" [disabled]="disableInput">
 </div>

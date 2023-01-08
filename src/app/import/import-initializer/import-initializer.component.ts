@@ -40,6 +40,22 @@ export class ImportInitializerComponent implements OnInit, OnDestroy {
         this.setDisabledButton();
       })
     )
+    this.subscription.add(
+      this.importInitializerService.finishedObservable.subscribe((value: boolean) => {
+        if (value) {
+          this.disabledButton = false;
+          this.importInitializerService.finish(false);
+          this.importInitializerService.init(false)
+        }
+      })
+    )
+    this.subscription.add(
+      this.importInitializerService.initObservable.subscribe((value: boolean) => {
+        if (value) {
+          this.disabledButton = true;
+        }
+      })
+    )
   }
 
   ngOnDestroy(): void {

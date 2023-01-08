@@ -1,7 +1,7 @@
 <div class="d-flex flex-row justify-content-evenly align-items-center">
   <div class="form-check form-switch">
     <input class="form-check-input" type="checkbox" role="switch" id="autoImportSwitch"
-           (change)="changeOptions($event.target)" [disabled]="disabledOptions">
+           (change)="changeOptions($event.target)" disabled checked>
     <label class="form-check-label unselectable" for="autoImportSwitch">Auto-import your song list</label>
     <i
       class="bi bi-info-circle text-muted mx-2"
@@ -10,8 +10,8 @@
       placement="bottom"
     ></i>
   </div>
-  <div>
-    <div class="form-check">
+  <div class="d-inline-flex">
+    <div class="form-check mx-3">
       <input class="form-check-input" type="radio" name="whereToSave" id="saveToLikedSongs" [disabled]="disabledOptions" (change)="changeOptions($event.target)" checked>
       <label class="form-check-label" for="saveToLikedSongs">Save to "Liked songs"</label>
     </div>
