@@ -5,11 +5,12 @@ import {AppComponent} from './app.component';
 import {TokenComponent} from './token/token.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { FileLoaderComponent } from './file-loader/file-loader.component';
-import { ImportOptionsComponent } from './import-options/import-options.component';
-import { ImportStatusComponent } from './import-status/import-status.component';
-import { ImportInitializerComponent } from './import-initializer/import-initializer.component';
+import { ImportOptionsComponent } from './import/import-options/import-options.component';
+import { ImportComponent } from './import/import.component';
+import { ImportInitializerComponent } from './import/import-initializer/import-initializer.component';
+import {SpotifyAuthInterceptor} from "./_helpers/spotify-auth.interceptor";
 
 @NgModule({
   declarations: [
@@ -17,7 +18,7 @@ import { ImportInitializerComponent } from './import-initializer/import-initiali
     TokenComponent,
     FileLoaderComponent,
     ImportOptionsComponent,
-    ImportStatusComponent,
+    ImportComponent,
     ImportInitializerComponent,
   ],
   imports: [
@@ -26,7 +27,9 @@ import { ImportInitializerComponent } from './import-initializer/import-initiali
     FormsModule,
     HttpClientModule,
   ],
-  providers: [],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: SpotifyAuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

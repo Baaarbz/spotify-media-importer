@@ -1,8 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {Subscription} from "rxjs";
-import {TrackService} from "../_services/track.service";
-import {OptionsService} from "../_services/options.service";
-import {SpotifyService} from "../_services/spotify.service";
+import {TrackService} from "../../_services/track.service";
+import {OptionsService} from "../../_services/options.service";
+import {SpotifyService} from "../../_services/spotify.service";
+import {ImportInitializerService} from "./import-initializer.service";
 
 @Component({
   selector: 'app-import-initializer',
@@ -12,6 +13,7 @@ import {SpotifyService} from "../_services/spotify.service";
 export class ImportInitializerComponent implements OnInit, OnDestroy {
 
   disabledButton: boolean = false;
+
   private emptyTracks: boolean = true;
   private emptyToken: boolean = true;
   private subscription: Subscription;
@@ -19,7 +21,8 @@ export class ImportInitializerComponent implements OnInit, OnDestroy {
   constructor(
     private trackService: TrackService,
     private optionsService: OptionsService,
-    private spotifyService: SpotifyService
+    private spotifyService: SpotifyService,
+    private importInitializerService: ImportInitializerService
   ) {
     this.subscription = new Subscription();
   }
@@ -32,7 +35,7 @@ export class ImportInitializerComponent implements OnInit, OnDestroy {
       })
     );
     this.subscription.add(
-      this.spotifyService.tokenObservable.subscribe((token:string) => {
+      this.spotifyService.tokenObservable.subscribe((token: string) => {
         this.emptyToken = token.length == 0
         this.setDisabledButton();
       })
@@ -45,6 +48,8 @@ export class ImportInitializerComponent implements OnInit, OnDestroy {
 
   startImport() {
     this.optionsService.setDisableOptions(true);
+    this.disabledButton = true;
+    this.importInitializerService.init(true);
   }
 
   private setDisabledButton() {

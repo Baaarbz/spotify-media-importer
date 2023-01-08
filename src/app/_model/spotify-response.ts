@@ -2,6 +2,14 @@ export interface SearchTrack {
   tracks: Track[];
 }
 
+export interface CreatePlaylist {
+  id: string;
+}
+
+export interface GetUserProfile {
+  id: string;
+}
+
 interface Image {
   height: number;
   url: string;
@@ -15,7 +23,7 @@ interface Album {
 }
 
 interface Artist {
-  name: String;
+  name: string;
 }
 
 interface Item {
