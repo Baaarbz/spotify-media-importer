@@ -3,7 +3,7 @@
 [![MIT License][license-shield]][license-url]
 
 [//]: # ([![LinkedIn][linkedin-shield]][linkedin-url])
-<h1 align="center">Welcome to Subscription System 👋</h1>
+<h1 align="center">Welcome to Spotify Media Importer 👋</h1>
 
 ## Author
 
