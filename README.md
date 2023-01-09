@@ -83,7 +83,7 @@ This is an example of how to list things you need to use the software and how to
 
 ## Roadmap
 
-- [ ] Add NON auto-import feature
+- [ ] Add NON auto-import feature, letting the user chose the track to import.
 - [ ] Export libraries of the Spotify account
 - [ ] Chose name of the created playlist
 - [ ] Integrate with other platforms as Amazon Music etc
