@@ -1,14 +1,22 @@
 {
   "name": "spotify-media-importer",
   "version": "1.0.0",
+  "description": "App to import your list of songs in csv files to your Spotify account",
   "main": "electron/main.js",
+  "license": "MIT",
+  "build": {
+    "appId": "dev.barbz.spotifymediaimporter"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "electron": "ng build && electron ."
+    "electron": "ng build && electron .",
+    "package:dir": "electron-builder --dir",
+    "package:dist": "electron-builder",
+    "postinstall": "electron-builder install-app-deps"
   },
   "private": true,
   "dependencies": {
@@ -34,6 +42,7 @@
     "@types/electron": "^1.6.10",
     "@types/jasmine": "~4.3.0",
     "electron": "^22.0.0",
+    "electron-builder": "^23.6.0",
     "jasmine-core": "~4.5.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",
