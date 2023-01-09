@@ -4,6 +4,7 @@
   "description": "App to import your list of songs in csv files to your Spotify account",
   "main": "electron/main.js",
   "license": "MIT",
+  "author": "Eduardo Barbosa Tarrio",
   "build": {
     "appId": "dev.barbz.spotifymediaimporter"
   },
