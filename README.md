@@ -114,7 +114,7 @@ This project is [MIT](https://github.com/Baaarbz/spotify-media-importer/blob/mai
 
 [license-shield]: https://img.shields.io/github/license/Baaarbz/spotify-media-importer.svg?style=for-the-badge
 
-[license-url]: https://github.com/Baaarbz/spotify-media-importer/blob/main/LICENSE.txt
+[license-url]: https://github.com/Baaarbz/spotify-media-importer/blob/main/LICENSE
 
 [linkedin-shield]: https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
 
